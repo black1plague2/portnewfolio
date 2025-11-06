@@ -1,4 +1,4 @@
-# AR/VR Developer Portfolio
+# Developer Portfolio
 
 A cutting-edge, immersive portfolio website featuring advanced 3D effects, rotating cube buttons, and cyberpunk aesthetics. Built with Vite and pure CSS 3D transforms.
 
