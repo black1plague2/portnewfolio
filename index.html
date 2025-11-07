@@ -3,36 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Garv Bansal - Senior XR Developer & Full-Stack Engineer specializing in AR/VR applications, Unity 3D development, and immersive experiences." />
+    <meta name="keywords" content="AR/VR Developer, Unity 3D, Meta Quest, XR Development, Full-Stack Developer, React, Node.js" />
+    <meta name="author" content="Garv Bansal" />
+
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="/src/styles.css" as="style" />
+    <link rel="preload" href="/profile.jpg" as="image" />
+
     <title>GARV BANSAL | AR/VR Developer</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
-  <body>
-    <div class="scroll-progress"></div>
-    <div class="grid-background"></div>
-    <div class="vignette"></div>
 
-    <nav class="nav-bar">
+  <body>
+    <!-- Progress indicator -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Background effects -->
+    <div class="grid-background" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <!-- 3D Floating Shapes -->
+    <div class="floating-3d-shapes" aria-hidden="true">
+      <div class="shape-3d shape-cube"></div>
+      <div class="shape-3d shape-sphere"></div>
+      <div class="shape-3d shape-pyramid"></div>
+      <div class="shape-3d shape-ring"></div>
+      <div class="shape-3d shape-cube"></div>
+      <div class="shape-3d shape-sphere"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar" role="navigation">
       <div class="logo-minimal">GARV BANSAL</div>
     </nav>
 
-    <div id="app">
-      <!-- Minimalist Landing Section -->
-      <section class="landing-section">
+    <!-- Main content -->
+    <main id="app">
+      <!-- Hero/Landing Section -->
+      <section class="landing-section" id="home" aria-label="Hero section">
         <div class="landing-content">
           <div class="name-line-container">
-            <div class="decorative-line"></div>
+            <div class="decorative-line" aria-hidden="true"></div>
             <h1 class="minimalist-name">GARV BANSAL</h1>
-            <div class="decorative-line"></div>
+            <div class="decorative-line" aria-hidden="true"></div>
           </div>
         </div>
       </section>
 
-      <!-- About Me Section (appears on scroll) -->
-      <section class="about-me-section reveal">
+      <!-- About Section -->
+      <section class="about-me-section reveal" id="about" aria-label="About me">
         <div class="about-wrapper">
           <div class="about-content">
             <div class="profile-image-container">
-              <img src="/profile.jpg" alt="Garv Bansal" class="profile-image" />
+              <img
+                src="/profile.jpg"
+                alt="Garv Bansal - AR/VR Developer"
+                class="profile-image"
+                loading="lazy"
+                width="250"
+                height="250"
+              />
             </div>
 
             <div class="bio-text">
@@ -60,19 +93,19 @@
           </div>
 
           <div class="cta-buttons">
-            <button class="btn-3d btn-primary">View Projects</button>
-            <button class="btn-3d btn-secondary">Contact Me</button>
+            <button class="btn-3d btn-primary" data-target="projects">View Projects</button>
+            <button class="btn-3d btn-secondary" data-target="contact">Contact Me</button>
           </div>
         </div>
       </section>
 
       <!-- Skills Section -->
-      <section class="skills-section reveal">
-        <h2 class="section-title" data-text="TECH ARSENAL">TECH ARSENAL</h2>
+      <section class="skills-section reveal" id="skills" aria-label="Technical skills">
+        <h2 class="section-title">TECH ARSENAL</h2>
         <div class="skills-grid">
           <div class="skill-category">
             <div class="skill-card">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <h3>🎮 AR/VR/XR Development</h3>
               <div class="skill-items">
                 <span class="skill-badge">Unity 3D</span>
@@ -87,7 +120,7 @@
 
           <div class="skill-category">
             <div class="skill-card">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <h3>💻 Programming Languages</h3>
               <div class="skill-items">
                 <span class="skill-badge">C++</span>
@@ -102,8 +135,8 @@
 
           <div class="skill-category">
             <div class="skill-card">
-              <div class="card-glow"></div>
-              <h3>� Web Technologies</h3>
+              <div class="card-glow" aria-hidden="true"></div>
+              <h3>🌐 Web Technologies</h3>
               <div class="skill-items">
                 <span class="skill-badge">React.js</span>
                 <span class="skill-badge">Node.js</span>
@@ -117,7 +150,7 @@
 
           <div class="skill-category">
             <div class="skill-card">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <h3>🔧 Tools & AI</h3>
               <div class="skill-items">
                 <span class="skill-badge">Git</span>
@@ -133,14 +166,13 @@
       </section>
 
       <!-- Projects Section -->
-      <section class="projects-section reveal">
-        <h2 class="section-title" data-text="FEATURED PROJECTS">
-          FEATURED PROJECTS
-        </h2>
+      <section class="projects-section reveal" id="projects" aria-label="Featured projects">
+        <h2 class="section-title">FEATURED PROJECTS</h2>
         <div class="project-grid">
-          <div class="project-card">
+          <!-- Project cards optimized with semantic structure -->
+          <article class="project-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="card-content">
                 <div class="project-status">🏆 Runner-Up InnovAct '25</div>
                 <h3>The Equilibrium: NeuroRehab Platform</h3>
@@ -161,16 +193,16 @@
                 </div>
                 <div class="project-stats">
                   <span>🏅 AR/VR Track Runner-Up</span>
-                  <span>� Jan 2025</span>
+                  <span>📅 Jan 2025</span>
                 </div>
                 <button class="btn-3d btn-small">View Demo</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card">
+          <article class="project-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="card-content">
                 <div class="project-status">🥇 Winner Hackulus '25</div>
                 <h3>EMG Fatigue Analysis Platform</h3>
@@ -188,16 +220,16 @@
                 </div>
                 <div class="project-stats">
                   <span>🥇 Overall Winner</span>
-                  <span>� GraVITas 2025</span>
+                  <span>🎯 GraVITas 2025</span>
                 </div>
                 <button class="btn-3d btn-small">View Demo</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card">
+          <article class="project-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="card-content">
                 <div class="project-status">🏥 Clinical Platform</div>
                 <h3>VCF Clinical Genomics Report System</h3>
@@ -216,28 +248,25 @@
                 </div>
                 <div class="project-stats">
                   <span>🏛️ IIT Delhi Internship</span>
-                  <span>� May-Jul 2025</span>
+                  <span>📅 May-Jul 2025</span>
                 </div>
                 <button class="btn-3d btn-small">View Demo</button>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="project-card">
+          <article class="project-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="card-content">
-                <div class="project-status">
-                  🎮 Interactive 3D Web Experience
-                </div>
+                <div class="project-status">🎮 Interactive 3D Web Experience</div>
                 <h3>Bald Games - Neural Portfolio</h3>
                 <p>
                   Immersive 3D web experience showcasing interactive neural
                   network visualization with floating brain cubes representing
                   different games. Features advanced Three.js rendering, custom
                   shaders, real-time performance monitoring, and intuitive
-                  controls with mouse look, zoom, and fly mode. Built for
-                  Baldmann with Quantum Core engine.
+                  controls with mouse look, zoom, and fly mode.
                 </p>
                 <div class="card-tags">
                   <span class="tag">Three.js</span>
@@ -253,28 +282,61 @@
                 <a
                   href="https://baldgame-alpha.vercel.app"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="btn-3d btn-small"
-                  >View Live</a
                 >
+                  View Live
+                </a>
               </div>
             </div>
-          </div>
+          </article>
+
+          <article class="project-card">
+            <div class="card-inner">
+              <div class="card-glow" aria-hidden="true"></div>
+              <div class="card-content">
+                <div class="project-status">💼 Professional Portfolio</div>
+                <h3>Developer Portfolio</h3>
+                <p>
+                  Modern, immersive portfolio website featuring 3D animations,
+                  floating geometric shapes, interactive cursor effects, and
+                  smooth scroll-based reveals. Built with Vite for optimal
+                  performance, showcasing advanced CSS animations, custom
+                  JavaScript interactions, and responsive design principles.
+                </p>
+                <div class="card-tags">
+                  <span class="tag">Vite</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">CSS3</span>
+                  <span class="tag">3D Effects</span>
+                  <span class="tag">Animations</span>
+                </div>
+                <div class="project-stats">
+                  <span>🎨 Modern Design</span>
+                  <span>⚡ Lightning Fast</span>
+                </div>
+                <a
+                  href="https://github.com/black1plague2/portnewfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-3d btn-small"
+                >
+                  View Source
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
       <!-- Hackathon Section -->
-      <section class="hackathon-section reveal">
-        <h2 class="section-title" data-text="HACKATHON VICTORIES">
-          HACKATHON VICTORIES
-        </h2>
+      <section class="hackathon-section reveal" id="hackathons" aria-label="Hackathon achievements">
+        <h2 class="section-title">HACKATHON VICTORIES</h2>
         <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-marker">🥈</div>
-            <div
-              class="timeline-card clickable-card"
-              data-hackathon="sprintathon"
-            >
-              <div class="card-glow"></div>
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true">🥈</div>
+            <div class="timeline-card clickable-card" data-hackathon="sprintathon">
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="timeline-content">
                 <div class="timeline-date">Feb 2025</div>
                 <h3>Sprintathon '25 - St. Joseph's College</h3>
@@ -300,12 +362,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="timeline-item">
-            <div class="timeline-marker">🏆</div>
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true">🏆</div>
             <div class="timeline-card clickable-card" data-hackathon="hackulus">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="timeline-content">
                 <div class="timeline-date">Feb 2025</div>
                 <h3>Hackulus Hackathon - GraVITas 2025</h3>
@@ -330,12 +392,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="timeline-item">
-            <div class="timeline-marker">🥈</div>
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true">🥈</div>
             <div class="timeline-card clickable-card" data-hackathon="innovact">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="timeline-content">
                 <div class="timeline-date">Jan 2025</div>
                 <h3>InnovAct Hackathon - IIC VIT Vellore</h3>
@@ -361,12 +423,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="timeline-item">
-            <div class="timeline-marker">🌟</div>
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true">🌟</div>
             <div class="timeline-card clickable-card" data-hackathon="yantra">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="timeline-content">
                 <div class="timeline-date">Nov 2023</div>
                 <h3>Yantra Hackathon 2023</h3>
@@ -390,25 +452,26 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
       <!-- Experience Section -->
-      <section class="experience-section reveal">
-        <h2 class="section-title" data-text="PROFESSIONAL JOURNEY">
-          PROFESSIONAL JOURNEY
-        </h2>
+      <section class="experience-section reveal" id="experience" aria-label="Professional experience">
+        <h2 class="section-title">PROFESSIONAL JOURNEY</h2>
         <div class="experience-grid">
-          <div class="experience-card">
+          <article class="experience-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="exp-content">
                 <div class="company-logo">
                   <img
                     src="https://baldmann.in/static/media/logo-yellow-final.3a6bdd92f7278367d8f2.png"
-                    alt="Baldmann Logo"
+                    alt="Baldmann Company Logo"
                     class="company-logo-img"
+                    loading="lazy"
+                    width="80"
+                    height="80"
                   />
                 </div>
                 <h3>Senior XR Developer</h3>
@@ -436,17 +499,20 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="experience-card">
+          <article class="experience-card">
             <div class="card-inner">
-              <div class="card-glow"></div>
+              <div class="card-glow" aria-hidden="true"></div>
               <div class="exp-content">
                 <div class="company-logo">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/512px-Indian_Institute_of_Technology_Delhi_Logo.svg.png"
                     alt="IIT Delhi Logo"
                     class="company-logo-img"
+                    loading="lazy"
+                    width="80"
+                    height="80"
                   />
                 </div>
                 <h3>Research & Software Dev Intern</h3>
@@ -478,19 +544,17 @@
                 </div>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
-      <!-- Education & Recognition -->
-      <section class="education-section reveal">
-        <h2 class="section-title" data-text="EDUCATION & HONORS">
-          EDUCATION & HONORS
-        </h2>
+      <!-- Education Section -->
+      <section class="education-section reveal" id="education" aria-label="Education and achievements">
+        <h2 class="section-title">EDUCATION & HONORS</h2>
 
         <div class="education-horizontal">
-          <div class="education-card">
-            <div class="card-glow"></div>
+          <article class="education-card">
+            <div class="card-glow" aria-hidden="true"></div>
             <div class="edu-content">
               <div class="edu-date">Aug 2023 – May 2027</div>
               <h3>Bachelor of Technology</h3>
@@ -503,10 +567,10 @@
                 <span class="tag">AI</span>
               </div>
             </div>
-          </div>
+          </article>
 
-          <div class="education-card">
-            <div class="card-glow"></div>
+          <article class="education-card">
+            <div class="card-glow" aria-hidden="true"></div>
             <div class="edu-content">
               <div class="edu-date">Apr 2021 – Mar 2023</div>
               <h3>ISC Grade 12</h3>
@@ -518,7 +582,7 @@
                 <span class="tag">Ministry Recognition</span>
               </div>
             </div>
-          </div>
+          </article>
         </div>
 
         <div class="recognition-banner">
@@ -532,64 +596,68 @@
       </section>
 
       <!-- Contact Section -->
-      <section class="contact-section reveal">
-        <h2 class="section-title" data-text="GET IN TOUCH">GET IN TOUCH</h2>
+      <section class="contact-section reveal" id="contact" aria-label="Contact information">
+        <h2 class="section-title">GET IN TOUCH</h2>
         <p class="contact-subtitle">Let's build something amazing together</p>
+
         <div class="contact-info">
           <div class="contact-item">
-            <span class="contact-icon">📍</span>
+            <span class="contact-icon" aria-hidden="true">📍</span>
             <span>Lucknow, Uttar Pradesh, India</span>
           </div>
           <div class="contact-item">
-            <span class="contact-icon">📧</span>
+            <span class="contact-icon" aria-hidden="true">📧</span>
             <span>garv16sep@gmail.com</span>
           </div>
           <div class="contact-item">
-            <span class="contact-icon">📱</span>
+            <span class="contact-icon" aria-hidden="true">📱</span>
             <span>+91 8318287304</span>
           </div>
         </div>
+
         <div class="social-buttons">
-          <button class="btn-3d btn-contact">
-            <span class="btn-icon">✉</span> Email
+          <button class="btn-3d btn-contact" data-action="email">
+            <span class="btn-icon" aria-hidden="true">✉</span> Email
           </button>
-
-          <button class="btn-3d btn-contact">
-            <span class="btn-icon">💼</span> LinkedIn
+          <button class="btn-3d btn-contact" data-action="linkedin">
+            <span class="btn-icon" aria-hidden="true">💼</span> LinkedIn
           </button>
-
-          <button class="btn-3d btn-contact">
-            <span class="btn-icon">🐙</span> GitHub
+          <button class="btn-3d btn-contact" data-action="github">
+            <span class="btn-icon" aria-hidden="true">🐙</span> GitHub
           </button>
         </div>
       </section>
+    </main>
 
-      <footer class="footer">
-        <p>
-          &copy; 2025 GARV BANSAL · Senior XR Developer · All Rights Reserved
-        </p>
-      </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <p>
+        &copy; 2025 GARV BANSAL · Senior XR Developer · All Rights Reserved
+      </p>
+    </footer>
 
     <!-- Certificate Modal -->
-    <div id="certificateModal" class="certificate-modal">
+    <div id="certificateModal" class="certificate-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-overlay"></div>
       <div class="modal-content">
-        <button class="modal-close">&times;</button>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
         <h2 id="modal-title"></h2>
         <div class="certificate-gallery">
-          <button class="gallery-nav prev" aria-label="Previous">
+          <button class="gallery-nav prev" aria-label="Previous certificate">
             &#10094;
           </button>
           <div class="certificate-container">
-            <img id="modal-image" src="" alt="Certificate" />
+            <img id="modal-image" src="" alt="Certificate" loading="lazy" />
           </div>
-          <button class="gallery-nav next" aria-label="Next">&#10095;</button>
+          <button class="gallery-nav next" aria-label="Next certificate">
+            &#10095;
+          </button>
         </div>
-        <div class="gallery-dots"></div>
+        <div class="gallery-dots" role="tablist" aria-label="Certificate navigation"></div>
       </div>
     </div>
 
+    <!-- Scripts -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

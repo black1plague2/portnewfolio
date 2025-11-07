@@ -699,6 +699,27 @@ body.modal-open {
   justify-content: center;
   padding: 4rem 2rem;
   position: relative;
+  border: 2px solid;
+  border-image: linear-gradient(
+    135deg,
+    rgba(93, 169, 233, 0.3),
+    rgba(255, 215, 0, 0.4),
+    rgba(93, 169, 233, 0.3)
+  ) 1;
+  margin: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(93, 169, 233, 0.03) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(255, 215, 0, 0.03) 100%
+  );
+  box-shadow: 
+    0 8px 32px rgba(93, 169, 233, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(93, 169, 233, 0.05);
+  backdrop-filter: blur(5px);
+  animation: borderPulse 4s ease-in-out infinite;
 }
 
 .about-wrapper {
@@ -1056,14 +1077,16 @@ section:first-of-type::before {
    ======================================== */
 
 .reveal {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.4s ease-out;
-  will-change: opacity, transform;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(80px);
+  transition: all 1s ease-out;
+  will-change: opacity, transform, visibility;
 }
 
 .reveal.active {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
 }
 
@@ -1107,13 +1130,33 @@ section:first-of-type::before {
 .skills-section {
   padding: 8rem 2rem;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 2rem auto;
   background: transparent;
   perspective: 2000px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: 2px solid;
+  border-image: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.4),
+    rgba(93, 169, 233, 0.5),
+    rgba(123, 107, 160, 0.4)
+  ) 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.02) 0%,
+    rgba(93, 169, 233, 0.04) 50%,
+    rgba(123, 107, 160, 0.02) 100%
+  );
+  box-shadow: 
+    0 8px 32px rgba(255, 215, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(93, 169, 233, 0.08);
+  backdrop-filter: blur(5px);
+  animation: borderPulse 5s ease-in-out infinite;
 }
 
 .skills-grid {
@@ -1237,6 +1280,27 @@ section:first-of-type::before {
 
 .projects-section {
   padding: 8rem 2rem;
+  margin: 2rem;
+  border: 2px solid;
+  border-image: linear-gradient(
+    180deg,
+    rgba(123, 107, 160, 0.4),
+    rgba(255, 215, 0, 0.5),
+    rgba(93, 169, 233, 0.4)
+  ) 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(123, 107, 160, 0.02) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(93, 169, 233, 0.03) 100%
+  );
+  box-shadow: 
+    0 8px 32px rgba(123, 107, 160, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(255, 215, 0, 0.08);
+  backdrop-filter: blur(5px);
+  animation: borderPulse 6s ease-in-out infinite;
   max-width: 1400px;
   margin: 0 auto;
   perspective: 2000px;
@@ -1754,12 +1818,32 @@ section:first-of-type::before {
 .experience-section {
   padding: 8rem 2rem;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 2rem auto;
   background: transparent;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border: 2px solid;
+  border-image: linear-gradient(
+    45deg,
+    rgba(93, 169, 233, 0.5),
+    rgba(255, 215, 0, 0.4),
+    rgba(123, 107, 160, 0.5)
+  ) 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    45deg,
+    rgba(93, 169, 233, 0.02) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(123, 107, 160, 0.03) 100%
+  );
+  box-shadow: 
+    0 8px 32px rgba(93, 169, 233, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(123, 107, 160, 0.08);
+  backdrop-filter: blur(5px);
+  animation: borderPulse 5.5s ease-in-out infinite;
 }
 
 .experience-grid {
@@ -1904,12 +1988,32 @@ section:first-of-type::before {
   padding: 8rem 2rem;
   text-align: center;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2rem auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
+  border: 2px solid;
+  border-image: linear-gradient(
+    270deg,
+    rgba(255, 215, 0, 0.5),
+    rgba(93, 169, 233, 0.4),
+    rgba(255, 215, 0, 0.5)
+  ) 1;
+  border-radius: 20px;
+  background: linear-gradient(
+    270deg,
+    rgba(255, 215, 0, 0.03) 0%,
+    rgba(93, 169, 233, 0.02) 50%,
+    rgba(255, 215, 0, 0.03) 100%
+  );
+  box-shadow: 
+    0 8px 32px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 80px rgba(93, 169, 233, 0.1);
+  backdrop-filter: blur(5px);
+  animation: borderPulse 4.5s ease-in-out infinite;
 }
 
 .contact-section::before {
@@ -3202,4 +3306,196 @@ img:hover {
     rgba(255, 215, 0, 0.06) 30%,
     transparent 70%
   );
+}
+
+/* ========================================
+   BORDER PULSE ANIMATION FOR SECTIONS
+   ======================================== */
+@keyframes borderPulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(93, 169, 233, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 0 80px rgba(93, 169, 233, 0.05);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 
+      0 12px 48px rgba(255, 215, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      0 0 100px rgba(255, 215, 0, 0.1);
+    filter: brightness(1.05);
+  }
+}
+
+/* ========================================
+   3D FLOATING GEOMETRIC SHAPES
+   ======================================== */
+.floating-3d-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.shape-3d {
+  position: absolute;
+  border-radius: 50%;
+  animation: float3D 20s ease-in-out infinite;
+  opacity: 0.1;
+  backdrop-filter: blur(2px);
+}
+
+.shape-cube {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(93, 169, 233, 0.2), rgba(123, 107, 160, 0.2));
+  border: 1px solid rgba(93, 169, 233, 0.3);
+  border-radius: 10px;
+  animation: rotateCube 15s linear infinite, float3D 20s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.shape-sphere {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.3), rgba(93, 169, 233, 0.1));
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.2), inset -10px -10px 30px rgba(0, 0, 0, 0.3);
+  animation: float3D 25s ease-in-out infinite;
+}
+
+.shape-pyramid {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 86px solid rgba(123, 107, 160, 0.2);
+  animation: rotatePyramid 18s linear infinite, float3D 22s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(123, 107, 160, 0.3));
+}
+
+.shape-ring {
+  width: 120px;
+  height: 120px;
+  border: 15px solid rgba(93, 169, 233, 0.2);
+  border-radius: 50%;
+  animation: rotateRing 12s linear infinite, float3D 18s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(93, 169, 233, 0.2);
+}
+
+/* Position shapes across the viewport */
+.shape-3d:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.shape-3d:nth-child(2) {
+  top: 20%;
+  right: 10%;
+  animation-delay: -3s;
+}
+
+.shape-3d:nth-child(3) {
+  top: 60%;
+  left: 15%;
+  animation-delay: -6s;
+}
+
+.shape-3d:nth-child(4) {
+  bottom: 15%;
+  right: 20%;
+  animation-delay: -9s;
+}
+
+.shape-3d:nth-child(5) {
+  top: 40%;
+  right: 5%;
+  animation-delay: -12s;
+}
+
+.shape-3d:nth-child(6) {
+  bottom: 30%;
+  left: 8%;
+  animation-delay: -15s;
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-50px) translateX(30px) rotateX(10deg) rotateY(10deg);
+  }
+  50% {
+    transform: translateY(-100px) translateX(-30px) rotateX(20deg) rotateY(20deg);
+  }
+  75% {
+    transform: translateY(-50px) translateX(-60px) rotateX(10deg) rotateY(-10deg);
+  }
+}
+
+@keyframes rotateCube {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotatePyramid {
+  0% {
+    transform: rotateZ(0deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg) rotateY(360deg);
+  }
+}
+
+@keyframes rotateRing {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+/* ========================================
+   PARTICLE SYSTEM FOR 3D DEPTH
+   ======================================== */
+.particle-3d {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(93, 169, 233, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(93, 169, 233, 0.8);
+  animation: particle-float 15s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateZ(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateZ(100px);
+    opacity: 0;
+  }
 }

@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionLinks()
   initCertificateModal()
   initCursorGlow()
+  init3DParticles()
+  init3DShapesInteraction()
 
   console.log(
     '%c🚀 GARV BANSAL | XR Developer Portfolio',
@@ -242,8 +244,19 @@ function initTabSwitching() {
   })
 }
 
-// Initialize Scroll Reveal Animations
+// Initialize Scroll Reveal Animations with Lazy Loading
 function initScrollReveal() {
+  // Initially hide all sections except landing - truly hidden
+  const allSections = document.querySelectorAll('section')
+  allSections.forEach((section) => {
+    if (!section.classList.contains('landing-section')) {
+      section.style.opacity = '0'
+      section.style.transform = 'translateY(80px)'
+      section.style.visibility = 'hidden'
+      section.style.transition = 'opacity 1s ease-out, transform 1s ease-out, visibility 0s linear 0s'
+    }
+  })
+
   // Reveal individual cards with stagger effect
   const cardElements = document.querySelectorAll(
     '.skill-card, .project-card, .timeline-item, .experience-card, .education-grid > *'
@@ -263,10 +276,46 @@ function initScrollReveal() {
   // Reveal entire sections
   const sectionElements = document.querySelectorAll('section.reveal')
 
-  // Intersection Observer for scroll-based reveals
+  // Intersection Observer for scroll-based lazy loading and reveals
   const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -80px 0px',
+    threshold: 0.25, // Increased - section needs to be 25% visible
+    rootMargin: '0px 0px -150px 0px', // Increased bottom margin - load only when closer
+  }
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Load and reveal the section
+        entry.target.style.visibility = 'visible'
+        entry.target.style.opacity = '1'
+        entry.target.style.transform = 'translateY(0)'
+        entry.target.classList.add('active')
+        
+        // Stagger reveal child elements
+        const children = entry.target.querySelectorAll('.reveal-left, .reveal-right, .reveal-scale')
+        children.forEach((child, index) => {
+          setTimeout(() => {
+            child.classList.add('active')
+          }, index * 150) // Increased stagger for smoother effect
+        })
+        
+        // Stop observing once loaded
+        sectionObserver.unobserve(entry.target)
+      }
+    })
+  }, observerOptions)
+
+  // Observe all sections
+  allSections.forEach((section) => {
+    if (!section.classList.contains('landing-section')) {
+      sectionObserver.observe(section)
+    }
+  })
+
+  // Card-level observer for finer control
+  const cardObserverOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px',
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -275,7 +324,7 @@ function initScrollReveal() {
         entry.target.classList.add('active')
       }
     })
-  }, observerOptions)
+  }, cardObserverOptions)
 
   // Observe cards with staggered delay (reduced from 0.1s to 0.05s)
   cardElements.forEach((el, index) => {
@@ -544,4 +593,96 @@ function initCertificateModal() {
     if (e.key === 'ArrowLeft') prevImage()
     if (e.key === 'ArrowRight') nextImage()
   })
+}
+
+// ========================================
+// 3D PARTICLES SYSTEM
+// ========================================
+function init3DParticles() {
+  const particleCount = 50
+  const container = document.querySelector('.floating-3d-shapes')
+  
+  if (!container) return
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div')
+    particle.className = 'particle-3d'
+    
+    // Random positioning
+    particle.style.left = Math.random() * 100 + '%'
+    particle.style.animationDelay = Math.random() * 15 + 's'
+    particle.style.animationDuration = (10 + Math.random() * 10) + 's'
+    
+    // Random colors between blue and gold
+    const colors = [
+      'rgba(93, 169, 233, 0.6)',
+      'rgba(255, 215, 0, 0.6)',
+      'rgba(123, 107, 160, 0.6)'
+    ]
+    const randomColor = colors[Math.floor(Math.random() * colors.length)]
+    particle.style.background = randomColor
+    particle.style.boxShadow = `0 0 10px ${randomColor}`
+    
+    container.appendChild(particle)
+  }
+}
+
+// ========================================
+// 3D SHAPES MOUSE INTERACTION
+// ========================================
+function init3DShapesInteraction() {
+  const shapes = document.querySelectorAll('.shape-3d')
+  
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX / window.innerWidth
+    const mouseY = e.clientY / window.innerHeight
+    
+    shapes.forEach((shape, index) => {
+      const speed = (index + 1) * 20
+      const x = (mouseX - 0.5) * speed
+      const y = (mouseY - 0.5) * speed
+      
+      shape.style.transform = `translate(${x}px, ${y}px)`
+    })
+  })
+  
+  // Add hover effect to shapes
+  shapes.forEach(shape => {
+    shape.addEventListener('mouseenter', () => {
+      shape.style.opacity = '0.3'
+      shape.style.transform = 'scale(1.2)'
+    })
+    
+    shape.addEventListener('mouseleave', () => {
+      shape.style.opacity = '0.1'
+      shape.style.transform = 'scale(1)'
+    })
+  })
+}
+
+// ========================================
+// ENHANCED SECTION BORDER GLOW ON SCROLL
+// ========================================
+function initSectionBorderGlow() {
+  const sections = document.querySelectorAll('section')
+  
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = 'borderPulse 4s ease-in-out infinite'
+        }
+      })
+    },
+    { threshold: 0.2 }
+  )
+  
+  sections.forEach(section => observer.observe(section))
+}
+
+// Initialize section border glow on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSectionBorderGlow)
+} else {
+  initSectionBorderGlow()
 }
