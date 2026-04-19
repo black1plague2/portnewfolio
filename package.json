@@ -12,5 +12,9 @@
     "vite": "^5.0.0"
   },
   "author": "GARV BANSAL",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "three": "^0.184.0"
+  }
 }
