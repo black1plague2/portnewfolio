@@ -3728,6 +3728,9 @@ img:hover {
 }
 .hackathon-featured .timeline-card {
   margin: 0;
+  max-width: 100%;
+  width: 100%;
+  flex: unset;
 }
 
 /* Compact hackathon grid (remaining) */
