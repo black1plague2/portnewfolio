@@ -1,8 +1,4 @@
 import './styles.css'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 document.addEventListener('DOMContentLoaded', () => {
   init3DButtons()
@@ -130,80 +126,47 @@ async function initNeuralHero() {
   }, { passive: true })
 }
 
-// ─── GSAP ANIMATIONS ──────────────────────────────────────────────────────────
+// ─── SCROLL REVEAL (IntersectionObserver — reliable cross-browser) ────────────
 function initGSAPAnimations() {
-  // Hero is handled by existing CSS fadeInUp animations — GSAP owns everything below the fold
+  const cards = document.querySelectorAll(
+    '.skill-card, .project-card, .timeline-card, .hackathon-compact-item, ' +
+    '.experience-card, .education-card, .recognition-banner, ' +
+    '.about-content, .cta-buttons, .contact-subtitle, .contact-info, .social-buttons'
+  )
+  const titles = document.querySelectorAll('.section-title')
 
-  const st = (trigger, extra = {}) => ({
-    trigger,
-    start: 'top 92%',
-    once: true,
-    ...extra,
-  })
+  const setHidden = el => {
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(36px)'
+    el.style.transition = 'opacity 0.65s ease-out, transform 0.65s ease-out'
+  }
+  const reveal = (el, delay = 0) => {
+    el.style.transitionDelay = `${delay}s`
+    el.style.opacity = '1'
+    el.style.transform = 'translateY(0)'
+  }
 
-  // Section titles
-  gsap.utils.toArray('.section-title').forEach(el => {
-    gsap.from(el, {
-      scrollTrigger: st(el),
-      opacity: 0, y: 28, duration: 0.8, ease: 'power3.out',
+  titles.forEach(setHidden)
+  cards.forEach(setHidden)
+
+  const titleObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); titleObs.unobserve(e.target) } })
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
+  titles.forEach(el => titleObs.observe(el))
+
+  // Stagger sibling cards within the same parent
+  const cardObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return
+      const siblings = [...e.target.parentElement.children].filter(c =>
+        c.matches('.skill-card, .project-card, .timeline-card, .hackathon-compact-item, .experience-card, .education-card')
+      )
+      const idx = siblings.indexOf(e.target)
+      reveal(e.target, idx * 0.1)
+      cardObs.unobserve(e.target)
     })
-  })
-
-  // About
-  gsap.from('.about-content', {
-    scrollTrigger: st('.about-me-section'),
-    opacity: 0, y: 36, duration: 0.9, ease: 'power3.out',
-  })
-  gsap.from('.cta-buttons', {
-    scrollTrigger: st('.cta-buttons'),
-    opacity: 0, y: 20, duration: 0.7, ease: 'power3.out',
-  })
-
-  // Skills
-  gsap.from('.skill-card', {
-    scrollTrigger: st('.skills-section'),
-    opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-  })
-
-  // Projects
-  gsap.from('.project-card', {
-    scrollTrigger: st('.projects-section'),
-    opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-  })
-
-  // Hackathons
-  gsap.from('.hackathon-featured .timeline-card', {
-    scrollTrigger: st('.hackathon-section'),
-    opacity: 0, y: 36, duration: 0.7, stagger: 0.13, ease: 'power3.out',
-  })
-  gsap.from('.hackathon-compact-item', {
-    scrollTrigger: st('.hackathon-compact-grid'),
-    opacity: 0, x: -20, duration: 0.55, stagger: 0.09, ease: 'power3.out',
-  })
-
-  // Experience
-  gsap.from('.experience-card', {
-    scrollTrigger: st('.experience-section'),
-    opacity: 0, y: 36, duration: 0.7, stagger: 0.13, ease: 'power3.out',
-  })
-
-  // Education
-  gsap.from('.education-card', {
-    scrollTrigger: st('.education-section'),
-    opacity: 0, y: 36, duration: 0.7, stagger: 0.1, ease: 'power3.out',
-  })
-  gsap.from('.recognition-banner', {
-    scrollTrigger: st('.recognition-banner'),
-    opacity: 0, y: 20, duration: 0.65, ease: 'power3.out',
-  })
-
-  // Contact
-  gsap.from('.contact-subtitle, .contact-info, .social-buttons', {
-    scrollTrigger: st('.contact-section'),
-    opacity: 0, y: 24, duration: 0.65, stagger: 0.12, ease: 'power3.out',
-  })
-
-  ScrollTrigger.refresh()
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' })
+  cards.forEach(el => cardObs.observe(el))
 }
 
 // ─── 3D BUTTON TILT ────────────────────────────────────────────────────────────
