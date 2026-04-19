@@ -132,15 +132,7 @@ async function initNeuralHero() {
 
 // ─── GSAP ANIMATIONS ──────────────────────────────────────────────────────────
 function initGSAPAnimations() {
-  // Hero entrance — staggered, no scroll trigger
-  gsap.timeline({ defaults: { ease: 'power3.out' } })
-    .from('.hero-status-line',  { opacity: 0, y: 18, duration: 0.7 }, 0.5)
-    .from('.hero-degree-tag',   { opacity: 0, y: 18, duration: 0.7 }, 0.65)
-    .from('.minimalist-name',   { opacity: 0, y: 52, duration: 1.1  }, 0.8)
-    .from('.hero-role-text',    { opacity: 0, y: 22, duration: 0.8  }, 1.15)
-    .from('.hero-stat-pill',    { opacity: 0, y: 14, duration: 0.5, stagger: 0.09 }, 1.35)
-    .from('.hero-cta-row > *',  { opacity: 0, y: 18, duration: 0.6, stagger: 0.11 }, 1.55)
-    .from('.scroll-arrow-indicator', { opacity: 0, duration: 0.8 }, 1.85)
+  // Hero is handled by existing CSS fadeInUp animations — GSAP owns everything below the fold
 
   // Section titles
   gsap.utils.toArray('.section-title').forEach(el => {
