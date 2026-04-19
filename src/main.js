@@ -366,21 +366,17 @@ function initCTAButtons() {
 
 // Initialize Section Links (for social buttons)
 function initSectionLinks() {
-  const contactButtons = document.querySelectorAll('.btn-contact')
+  const actions = {
+    email:    () => { window.location.href = 'mailto:garv16sep@gmail.com' },
+    linkedin: () => { window.open('https://linkedin.com/in/garv12bansal', '_blank') },
+    github:   () => { window.open('https://github.com/black1plague2', '_blank') },
+  }
 
-  contactButtons.forEach((button) => {
-    const buttonText = button.textContent.toLowerCase()
-
+  document.querySelectorAll('.btn-contact[data-action]').forEach((button) => {
     button.addEventListener('click', (e) => {
       e.preventDefault()
-
-      if (buttonText.includes('email')) {
-        window.location.href = 'mailto:garv16sep@gmail.com'
-      } else if (buttonText.includes('linkedin')) {
-        window.open('https://linkedin.com/in/garv12bansal', '_blank')
-      } else if (buttonText.includes('github')) {
-        window.open('https://github.com/black1plague2', '_blank')
-      }
+      const fn = actions[button.dataset.action]
+      if (fn) fn()
     })
   })
 }
