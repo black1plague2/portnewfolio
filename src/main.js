@@ -134,71 +134,76 @@ async function initNeuralHero() {
 function initGSAPAnimations() {
   // Hero is handled by existing CSS fadeInUp animations — GSAP owns everything below the fold
 
+  const st = (trigger, extra = {}) => ({
+    trigger,
+    start: 'top 92%',
+    once: true,
+    ...extra,
+  })
+
   // Section titles
   gsap.utils.toArray('.section-title').forEach(el => {
     gsap.from(el, {
-      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-      opacity: 0, y: 32, duration: 0.85, ease: 'power3.out',
+      scrollTrigger: st(el),
+      opacity: 0, y: 28, duration: 0.8, ease: 'power3.out',
     })
   })
 
   // About
   gsap.from('.about-content', {
-    scrollTrigger: { trigger: '.about-me-section', start: 'top 78%' },
-    opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: st('.about-me-section'),
+    opacity: 0, y: 36, duration: 0.9, ease: 'power3.out',
   })
   gsap.from('.cta-buttons', {
-    scrollTrigger: { trigger: '.about-me-section', start: 'top 70%' },
-    opacity: 0, y: 24, duration: 0.7, ease: 'power3.out', delay: 0.15,
+    scrollTrigger: st('.cta-buttons'),
+    opacity: 0, y: 20, duration: 0.7, ease: 'power3.out',
   })
 
-  // Skills — stagger cards
+  // Skills
   gsap.from('.skill-card', {
-    scrollTrigger: { trigger: '.skills-section', start: 'top 78%' },
-    opacity: 0, y: 44, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+    scrollTrigger: st('.skills-section'),
+    opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power3.out',
   })
 
-  // Projects — stagger cards
+  // Projects
   gsap.from('.project-card', {
-    scrollTrigger: { trigger: '.projects-section', start: 'top 78%' },
-    opacity: 0, y: 48, duration: 0.75, stagger: 0.13, ease: 'power3.out',
+    scrollTrigger: st('.projects-section'),
+    opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power3.out',
   })
 
-  // Hackathons — featured then compact
+  // Hackathons
   gsap.from('.hackathon-featured .timeline-card', {
-    scrollTrigger: { trigger: '.hackathon-section', start: 'top 78%' },
-    opacity: 0, y: 44, duration: 0.75, stagger: 0.15, ease: 'power3.out',
-  })
-  gsap.from('.hackathon-rest-label', {
-    scrollTrigger: { trigger: '.hackathon-compact-grid', start: 'top 90%' },
-    opacity: 0, duration: 0.6, ease: 'power2.out',
+    scrollTrigger: st('.hackathon-section'),
+    opacity: 0, y: 36, duration: 0.7, stagger: 0.13, ease: 'power3.out',
   })
   gsap.from('.hackathon-compact-item', {
-    scrollTrigger: { trigger: '.hackathon-compact-grid', start: 'top 88%' },
-    opacity: 0, x: -24, duration: 0.6, stagger: 0.1, ease: 'power3.out',
+    scrollTrigger: st('.hackathon-compact-grid'),
+    opacity: 0, x: -20, duration: 0.55, stagger: 0.09, ease: 'power3.out',
   })
 
   // Experience
   gsap.from('.experience-card', {
-    scrollTrigger: { trigger: '.experience-section', start: 'top 78%' },
-    opacity: 0, y: 44, duration: 0.75, stagger: 0.15, ease: 'power3.out',
+    scrollTrigger: st('.experience-section'),
+    opacity: 0, y: 36, duration: 0.7, stagger: 0.13, ease: 'power3.out',
   })
 
   // Education
   gsap.from('.education-card', {
-    scrollTrigger: { trigger: '.education-section', start: 'top 78%' },
-    opacity: 0, y: 40, duration: 0.75, stagger: 0.12, ease: 'power3.out',
+    scrollTrigger: st('.education-section'),
+    opacity: 0, y: 36, duration: 0.7, stagger: 0.1, ease: 'power3.out',
   })
   gsap.from('.recognition-banner', {
-    scrollTrigger: { trigger: '.recognition-banner', start: 'top 88%' },
-    opacity: 0, y: 24, duration: 0.7, ease: 'power3.out',
+    scrollTrigger: st('.recognition-banner'),
+    opacity: 0, y: 20, duration: 0.65, ease: 'power3.out',
   })
 
   // Contact
   gsap.from('.contact-subtitle, .contact-info, .social-buttons', {
-    scrollTrigger: { trigger: '.contact-section', start: 'top 80%' },
-    opacity: 0, y: 28, duration: 0.7, stagger: 0.13, ease: 'power3.out',
+    scrollTrigger: st('.contact-section'),
+    opacity: 0, y: 24, duration: 0.65, stagger: 0.12, ease: 'power3.out',
   })
+
+  ScrollTrigger.refresh()
 }
 
 // ─── 3D BUTTON TILT ────────────────────────────────────────────────────────────
