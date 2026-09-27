@@ -58,7 +58,7 @@ async function initNeuralHero() {
   const ptGeo = new THREE.BufferGeometry()
   ptGeo.setAttribute('position', ptAttr)
   scene.add(new THREE.Points(ptGeo, new THREE.PointsMaterial({
-    color: 0x5da9e9, size: 2.4, transparent: true, opacity: 0.5, sizeAttenuation: true,
+    color: 0x7C6FF0, size: 2.4, transparent: true, opacity: 0.5, sizeAttenuation: true,
   })))
 
   // Lines — pre-allocated single LineSegments for perf
@@ -70,7 +70,7 @@ async function initNeuralHero() {
   lineGeo.setAttribute('position', lineAttr)
   lineGeo.setDrawRange(0, 0)
   scene.add(new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({
-    color: 0x5da9e9, transparent: true, opacity: 0.09,
+    color: 0x7C6FF0, transparent: true, opacity: 0.09,
   })))
 
   let mouseX = 0, mouseY = 0
@@ -126,47 +126,61 @@ async function initNeuralHero() {
   }, { passive: true })
 }
 
-// ─── SCROLL REVEAL (IntersectionObserver — reliable cross-browser) ────────────
-function initGSAPAnimations() {
-  const cards = document.querySelectorAll(
-    '.skill-card, .project-card, .timeline-card, .hackathon-compact-item, ' +
-    '.experience-card, .education-card, .recognition-banner, ' +
-    '.about-content, .cta-buttons, .contact-subtitle, .contact-info, .social-buttons'
-  )
+// ─── SCROLL REVEAL (real GSAP tweens, triggered by IntersectionObserver) ──────
+// IntersectionObserver stays the trigger (battle-tested, fires reliably the
+// instant an element enters view) while GSAP replaces the old flat CSS
+// "ease-out" transition with a genuine eased tween — a soft deceleration on
+// titles/blocks and a lively little overshoot settle on cards, instead of a
+// mechanical linear-feeling fade.
+async function initGSAPAnimations() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const { gsap } = await import('gsap')
+
+  const setHidden = (el, y) => gsap.set(el, { opacity: 0, y })
+  const reveal = (el, { y, delay = 0, ease }) =>
+    gsap.to(el, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease, delay, overwrite: true })
+
+  // Section titles
   const titles = document.querySelectorAll('.section-title')
-
-  const setHidden = el => {
-    el.style.opacity = '0'
-    el.style.transform = 'translateY(36px)'
-    el.style.transition = 'opacity 0.65s ease-out, transform 0.65s ease-out'
-  }
-  const reveal = (el, delay = 0) => {
-    el.style.transitionDelay = `${delay}s`
-    el.style.opacity = '1'
-    el.style.transform = 'translateY(0)'
-  }
-
-  titles.forEach(setHidden)
-  cards.forEach(setHidden)
-
+  titles.forEach(el => setHidden(el, 30))
   const titleObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { reveal(e.target); titleObs.unobserve(e.target) } })
+    entries.forEach(e => {
+      if (!e.isIntersecting) return
+      reveal(e.target, { y: 30, ease: 'power3.out' })
+      titleObs.unobserve(e.target)
+    })
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
   titles.forEach(el => titleObs.observe(el))
 
-  // Stagger sibling cards within the same parent
+  // Cards — staggered per sibling group, with a gentle overshoot on settle
+  const cardSelector = '.skill-card, .project-card, .timeline-card, .hackathon-compact-item, .experience-card, .education-card'
+  const cards = document.querySelectorAll(cardSelector)
+  cards.forEach(el => gsap.set(el, { opacity: 0, y: 46, scale: 0.96 }))
   const cardObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return
-      const siblings = [...e.target.parentElement.children].filter(c =>
-        c.matches('.skill-card, .project-card, .timeline-card, .hackathon-compact-item, .experience-card, .education-card')
-      )
+      const siblings = [...e.target.parentElement.children].filter(c => c.matches(cardSelector))
       const idx = siblings.indexOf(e.target)
-      reveal(e.target, idx * 0.1)
+      reveal(e.target, { y: 46, delay: idx * 0.1, ease: 'back.out(1.4)' })
       cardObs.unobserve(e.target)
     })
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' })
   cards.forEach(el => cardObs.observe(el))
+
+  // Remaining loose content blocks
+  const blocks = document.querySelectorAll(
+    '.recognition-banner, .about-content, .cta-buttons, .contact-subtitle, .contact-info, .social-buttons'
+  )
+  blocks.forEach(el => setHidden(el, 34))
+  const blockObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return
+      reveal(e.target, { y: 34, ease: 'power3.out' })
+      blockObs.unobserve(e.target)
+    })
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' })
+  blocks.forEach(el => blockObs.observe(el))
 }
 
 // ─── 3D BUTTON TILT ────────────────────────────────────────────────────────────
@@ -340,7 +354,7 @@ function initCertificateModal() {
     sprintathon: { title: "Sprintathon '25 — Gallery",            images: ['/certificates/sprintathon-1.jpeg','/certificates/sprintathon-2.jpeg'] },
     hackulus:    { title: 'Hackulus / GraVITas 2025 — Gallery',    images: ['/certificates/hackulus-1.jpg','/certificates/hackulus-2.jpg'] },
     innovact:    { title: "InnovAct '25 — Gallery",                images: ['/certificates/innovact-1.jpeg','/certificates/innovact-2.jpeg','/certificates/innovact-3.jpeg'] },
-    yantra:      { title: 'Yantra Hackathon 2023 — Gallery',       images: ['/certificates/yantra-1.jpeg','/certificates/yantra-2.jpeg'] },
+    yantra:      { title: 'Yantra Hackathon 2024 — Gallery',       images: ['/certificates/yantra-1.jpeg','/certificates/yantra-2.jpeg'] },
     cardano:     { title: 'Cardano Asia Hackathon 2025 — Gallery', images: ['/certificates/cardano-1.jpg','/certificates/cardano-2.jpg','/certificates/cardano-3.jpg'] },
     iinventiv:   { title: 'IInventiv 2025 — Gallery',             images: ['/certificates/iinventiv-1.jpg'] },
     innohack:    { title: 'InnoHack 2025 — Gallery',              images: ['/certificates/innohack-1.jpg','/certificates/innohack-2.jpg'] },
@@ -456,7 +470,7 @@ function initCertificateModal() {
 // ─── TYPEWRITER ───────────────────────────────────────────────────────────────
 function initTypewriter() {
   const el = document.querySelector('.typewriter-text'); if (!el) return
-  const roles = ['XR Developer','AR / VR Engineer','Full-Stack Developer','AI Innovator','Unity Specialist','BCI Researcher']
+  const roles = ['XR Developer','AR / VR Engineer','Agentic AI Engineer','Full-Stack Developer','Unity Specialist','BCI Researcher']
   let ri = 0, ci = 0, deleting = false
   function tick() {
     const cur = roles[ri]
